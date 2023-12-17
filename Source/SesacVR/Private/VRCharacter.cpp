@@ -2,6 +2,7 @@
 
 
 #include "VRCharacter.h"
+
 #include "MotionControllerComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
@@ -40,6 +41,7 @@ void AVRCharacter::BeginPlay()
 		}
 	}
 	
+
 }
 
 // Called every frame
@@ -54,5 +56,30 @@ void AVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+
+	if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("SetupPlayerInputComponent"));
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(IA_LeftThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func1);
+		EnhancedInputComponent->BindAction(IA_LeftTrigger, ETriggerEvent::Triggered, this, &AVRCharacter::Func2);
+		EnhancedInputComponent->BindAction(IA_RightThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func3);
+		
+	}
+}
+
+void AVRCharacter::Func1(const FInputActionValue& Value)
+{
+	if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Func1"));
+}
+
+void AVRCharacter::Func2(const FInputActionValue& Value)
+{
+	if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Func2"));
+}
+
+void AVRCharacter::Func3(const FInputActionValue& Value)
+{
+	if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Func3"));
 }
 
