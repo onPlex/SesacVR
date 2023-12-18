@@ -35,6 +35,9 @@ void AGrabbableItem::Grab(UMotionControllerComponent* GrabController)
 
 void AGrabbableItem::Release()
 {
+	CurrentController = nullptr;
 
+	//TODO:
+	
 }
 

@@ -7,6 +7,7 @@
 #include "Interaction.h"
 #include "GrabbableItem.generated.h"
 
+
 UCLASS()
 class SESACVR_API AGrabbableItem : public AActor, public IInteraction
 {
@@ -29,4 +30,5 @@ public:
 
 
 	UMotionControllerComponent* CurrentController;
+
 };
