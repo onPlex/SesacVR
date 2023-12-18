@@ -16,27 +16,28 @@ AVRCharacter::AVRCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
-	SetRootComponent(VROrigin);
+	
+	SetRootComponent(GetCapsuleComponent());
+	//GetCapsuleComponent()->SetCapsuleSize(1.f, 1.f);
 
 	GetMesh()->SetupAttachment(RootComponent);
 	GetArrowComponent()->SetupAttachment(RootComponent);
-	GetCapsuleComponent()->SetupAttachment(RootComponent);
-	GetCapsuleComponent()->SetCapsuleSize(1.f, 1.f);
 
 
+	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
+	VROrigin->SetupAttachment(RootComponent);
 
 	LeftController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftCon"));
 	LeftController->MotionSource = FName("Left");
-	LeftController->SetupAttachment(RootComponent);
+	LeftController->SetupAttachment(VROrigin);
 	
 	RightController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightCon"));
 	RightController->MotionSource = FName("Right");
-	RightController->SetupAttachment(RootComponent);
+	RightController->SetupAttachment(VROrigin);
 
 	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("HMD"));
-	CameraComp->SetupAttachment(RootComponent);
+	CameraComp->SetupAttachment(VROrigin);
 }
 
 // Called when the game starts or when spawned
