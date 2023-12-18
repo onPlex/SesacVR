@@ -16,10 +16,13 @@ AVRCharacter::AVRCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	
 	SetRootComponent(GetCapsuleComponent());
 	//GetCapsuleComponent()->SetCapsuleSize(1.f, 1.f);
+
 	GetMesh()->SetupAttachment(RootComponent);
 	GetArrowComponent()->SetupAttachment(RootComponent);
+
 
 	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
 	VROrigin->SetupAttachment(RootComponent);
@@ -32,6 +35,7 @@ AVRCharacter::AVRCharacter()
 	RightController->MotionSource = FName("Right");
 	RightController->SetupAttachment(VROrigin);
 
+	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("HMD"));
 	CameraComp->SetupAttachment(VROrigin);
 }
@@ -64,62 +68,24 @@ void AVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		//EnhancedInputComponent->BindAction(IA_LeftThumbstick_X, ETriggerEvent::Triggered, this, &AVRCharacter::MoveHorizontal);
-		//EnhancedInputComponent->BindAction(IA_LeftThumbstick_Y, ETriggerEvent::Triggered, this, &AVRCharacter::MoveVertical);
-		//EnhancedInputComponent->BindAction(IA_RightThumbstick_X, ETriggerEvent::Triggered, this, &AVRCharacter::SmoothTurn);
-		
-
+		//EnhancedInputComponent->BindAction(IA_LeftThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func1);
+		//EnhancedInputComponent->BindAction(IA_LeftTrigger, ETriggerEvent::Triggered, this, &AVRCharacter::Func2);
+		//EnhancedInputComponent->BindAction(IA_RightThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func3);	
 	}
 }
 
-void AVRCharacter::MoveVertical(const FInputActionValue& Value)
+void AVRCharacter::Func1(const FInputActionValue& Value)
 {
-	// 왼쪽 컨트롤러의 Thumbstick 값을 가져옴
-	float ThumbstickInput = Value.Get<float>();
-
-	// Thumbstick의 값을 이용하여 전진 또는 후진 방향과 속도 조절
-	FVector MovementDirection = GetActorForwardVector() * ThumbstickInput * 1000.f; // 앞뒤 이동
-
-	SetActorLocation(GetActorLocation() + MovementDirection);
-	// 캐릭터 이동
-	//AddMovementInput(MovementDirection, 1.0f); // 1.0f는 이동 속도
-
-	// 이동한 내용을 화면에 표시
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("MoveVertical - Thumbstick Value: %f"), ThumbstickInput));
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("LeftThumbstick"));
 }
 
-void AVRCharacter::MoveHorizontal(const FInputActionValue& Value)
-{
-	// 왼쪽 컨트롤러의 Thumbstick 값을 가져옴
-	float ThumbstickInput = Value.Get<float>();
-
-	// Thumbstick의 값을 이용하여 전진 또는 후진 방향과 속도 조절
-	FVector MovementDirection = GetActorRightVector() * ThumbstickInput * 1000.f; // 앞뒤 이동
-
-	// 캐릭터 이동
-	AddMovementInput(MovementDirection, 1.0f); // 1.0f는 이동 속도
-
-	// 이동한 내용을 화면에 표시
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("MoveHorizontal - Thumbstick Value: %f"), ThumbstickInput));
-}
-
-void AVRCharacter::SmoothTurn(const FInputActionValue& Value)
+void AVRCharacter::Func2(const FInputActionValue& Value)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("LeftTrigger"));
-
-	// 오른쪽 컨트롤러의 Thumbstick X 값을 가져옴
-	float ThumbstickXInput = Value.Get<float>();
-
-	// Thumbstick X의 값을 이용하여 캐릭터 회전
-	
-	FRotator NewRotation = FRotator(0.0f, ThumbstickXInput, 0.0f); // Yaw 값 변경
-
-	// 캐릭터 회전
-	AddActorLocalRotation(NewRotation);
-
-	// 회전한 내용을 화면에 표시
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("SmoothTurn - Thumbstick X Value: %f"), ThumbstickXInput));
 }
 
-
+void AVRCharacter::Func3(const FInputActionValue& Value)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("RightThumbstick"));
+} 
 
