@@ -30,10 +30,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputMappingContext* PlayerMappingContext;
 
-	UPROPERTY(EditAnywhere, Category = "HMD")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = "HMD")
 	class UCameraComponent* CameraComp;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HMD")
+	class USceneComponent* VROrigin;
+	 
 protected:
       
 	 UPROPERTY(EditAnywhere, Category = "Input")

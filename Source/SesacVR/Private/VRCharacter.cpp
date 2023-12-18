@@ -7,6 +7,8 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/ArrowComponent.h"
 
 // Sets default values
 AVRCharacter::AVRCharacter()
@@ -14,15 +16,27 @@ AVRCharacter::AVRCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
+	SetRootComponent(VROrigin);
+
+	GetMesh()->SetupAttachment(RootComponent);
+	GetArrowComponent()->SetupAttachment(RootComponent);
+	GetCapsuleComponent()->SetupAttachment(RootComponent);
+	GetCapsuleComponent()->SetCapsuleSize(1.f, 1.f);
+
+
+
 	LeftController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftCon"));
 	LeftController->MotionSource = FName("Left");
+	LeftController->SetupAttachment(RootComponent);
 	
 	RightController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightCon"));
-	LeftController->MotionSource = FName("Right");
+	RightController->MotionSource = FName("Right");
+	RightController->SetupAttachment(RootComponent);
 
-	GetCapsuleComponent()->SetCapsuleSize(1.f,1.f);
-
+	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("HMD"));
+	CameraComp->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -53,9 +67,9 @@ void AVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(IA_LeftThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func1);
-		EnhancedInputComponent->BindAction(IA_LeftTrigger, ETriggerEvent::Triggered, this, &AVRCharacter::Func2);
-		EnhancedInputComponent->BindAction(IA_RightThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func3);	
+		//EnhancedInputComponent->BindAction(IA_LeftThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func1);
+		//EnhancedInputComponent->BindAction(IA_LeftTrigger, ETriggerEvent::Triggered, this, &AVRCharacter::Func2);
+		//EnhancedInputComponent->BindAction(IA_RightThumbstick, ETriggerEvent::Triggered, this, &AVRCharacter::Func3);	
 	}
 }
 
