@@ -30,8 +30,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputMappingContext* PlayerMappingContext;
 
-	UPROPERTY(EditAnywhere, Category = "HMD")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "HMD")
 	class UCameraComponent* CameraComp;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HMD")
+	class USceneComponent* VROrigin;
 
 
 protected:
@@ -41,7 +45,18 @@ protected:
 	 UPROPERTY(EditAnywhere, Category = "Input")
 	 class UInputAction* IA_LeftTrigger;
 	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_LeftThumbstick_X;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_LeftThumbstick_Y;
+
+	 UPROPERTY(EditAnywhere, Category = "Input")
 	 class UInputAction* IA_RightThumbstick;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_RightTrigger;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_RightThumbstick_Y;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_RightThumbstick_X;
 
 public:	
 	// Called every frame
@@ -51,10 +66,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION()
-	void Func1(const FInputActionValue& Value);
+	void MoveVertical(const FInputActionValue& Value);
 	UFUNCTION()
-	void Func2(const FInputActionValue& Value);
+	void MoveHorizontal(const FInputActionValue& Value);
 	UFUNCTION()
-	void Func3(const FInputActionValue& Value);
+	void SmoothTurn(const FInputActionValue& Value);
+
 
 };
