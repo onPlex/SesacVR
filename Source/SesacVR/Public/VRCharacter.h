@@ -21,10 +21,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Controller")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	class UMotionControllerComponent* LeftController;
 
-	UPROPERTY(EditAnywhere, Category = "Controller")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	class UMotionControllerComponent* RightController;
 
 	UPROPERTY(EditAnywhere, Category = "Input")

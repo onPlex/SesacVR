@@ -17,11 +17,11 @@ AVRCharacter::AVRCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	
-	SetRootComponent(GetCapsuleComponent());
+	//SetRootComponent(GetCapsuleComponent());
 	//GetCapsuleComponent()->SetCapsuleSize(1.f, 1.f);
 
-	GetMesh()->SetupAttachment(RootComponent);
-	GetArrowComponent()->SetupAttachment(RootComponent);
+	//GetMesh()->SetupAttachment(RootComponent);
+	//GetArrowComponent()->SetupAttachment(RootComponent);
 
 
 	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
