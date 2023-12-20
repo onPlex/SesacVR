@@ -6,9 +6,7 @@
 #include "UObject/Interface.h"
 #include "Interaction.generated.h"
 
-
 class UMotionControllerComponent;
-
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
@@ -27,6 +25,6 @@ class SESACVR_API IInteraction
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	virtual void Grab(UMotionControllerComponent* GrabController) = 0;
+    virtual void Grab(UMotionControllerComponent* GrabController) = 0;
 	virtual void Release() = 0;
 };

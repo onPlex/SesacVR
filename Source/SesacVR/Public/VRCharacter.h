@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputAction.h"
 #include "VRCharacter.generated.h"
+
 
 UCLASS()
 class SESACVR_API AVRCharacter : public ACharacter
@@ -28,16 +30,20 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputMappingContext* PlayerMappingContext;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HMD")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = "HMD")
 	class UCameraComponent* CameraComp;
 
-
-	UPROPERTY(EditAnywhere, Category = "Input")
-	class UInputAction* IA_LeftThumbstick;
-	UPROPERTY(EditAnywhere, Category = "Input")
-	class UInputAction* IA_LeftTrigger;
-	UPROPERTY(EditAnywhere, Category = "Input")
-	class UInputAction* IA_RightThumbstick;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HMD")
+	class USceneComponent* VROrigin;
+	 
+protected:
+      
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_LeftThumbstick;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_LeftTrigger;
+	 UPROPERTY(EditAnywhere, Category = "Input")
+	 class UInputAction* IA_RightThumbstick;
 
 public:	
 	// Called every frame
@@ -47,11 +53,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION()
-    void Func1(const FInputActionValue& Value);
+	void Func1(const FInputActionValue& Value);
 	UFUNCTION()
 	void Func2(const FInputActionValue& Value);
 	UFUNCTION()
 	void Func3(const FInputActionValue& Value);
-
 
 };

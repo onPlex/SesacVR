@@ -28,4 +28,7 @@ public:
 	virtual void Grab(UMotionControllerComponent* GrabController) override;
 	virtual void Release() override;
 
+
+	UMotionControllerComponent* CurrentController;
+
 };

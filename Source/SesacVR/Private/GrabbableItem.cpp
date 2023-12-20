@@ -2,7 +2,6 @@
 
 
 #include "GrabbableItem.h"
-#include "MotionControllerComponent.h"
 
 // Sets default values
 AGrabbableItem::AGrabbableItem()
@@ -28,11 +27,17 @@ void AGrabbableItem::Tick(float DeltaTime)
 
 void AGrabbableItem::Grab(UMotionControllerComponent* GrabController)
 {
+	CurrentController = GrabController;
 
+	//TODO:
+	//AttachToComponent(GrabController);
 }
 
 void AGrabbableItem::Release()
 {
+	CurrentController = nullptr;
 
+	//TODO:
+	
 }
 
